@@ -8,7 +8,7 @@
  * Controller of the blackjackApp
  */
 angular.module('blackjackApp')
-    .controller('HandCtrl', function (Dealer, $scope, $rootScope) {
+    .controller('HandCtrl', function (Dealer, $scope) {
         $scope.errorMessage = false;
         $scope.dealer = false;
 
@@ -37,11 +37,4 @@ angular.module('blackjackApp')
         $scope.stand = function () {
             $scope.player.willStand();
         };
-
-        $scope.reset = function () {
-            if ($scope.dealer) {
-                Dealer.deal(2, $scope.player.id);
-            }
-        };
-        $rootScope.$on('dealer-reset', $scope.reset);
     });

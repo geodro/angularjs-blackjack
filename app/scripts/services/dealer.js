@@ -8,7 +8,7 @@
  * Service in the blackjackApp.
  */
 angular.module('blackjackApp')
-    .service('Dealer', function ($rootScope, Game, Deck, User) {
+    .service('Dealer', function (Game, Deck, User) {
         var user = new User(999);
 
         // Override the user name
@@ -49,9 +49,7 @@ angular.module('blackjackApp')
             user.ready = false;
             user.winner = false;
             user.tied = false;
-
-            // Let the game know that dealer has been reset
-            $rootScope.$emit('dealer-reset');
+            user.deal(2);
         };
 
         // Play Dealer hand
