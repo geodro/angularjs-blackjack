@@ -1,0 +1,14 @@
+<div ng-hide="on" class="row">
+    <div class="col-md-4">
+        <div class="input-group">
+            <input ng-model="players" type="number" class="form-control" placeholder="How many players?">
+            <span class="input-group-btn">
+                <button class="btn btn-default" ng-click="play()" type="button">Play!</button>
+            </span>
+        </div>
+    </div>
+</div>
+<hand ng-if="on"></hand>
+<hand ng-if="on" ng-repeat="player in game.players"></hand>
+<button ng-show="game.gameover && on" class="btn btn-default" ng-click="play()" type="button">Play Again</button>
+<button ng-show="game.gameover && on" class="btn btn-default" ng-click="reset()" type="button">Reset</button>

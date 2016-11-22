@@ -1,0 +1,42 @@
+<div class="panel" ng-class="{'panel-success': player.winner || (player.blackjack && !dealer), 'panel-default': dealer || player.score() < 21, 'panel-danger': player.busted, 'panel-info': player.stand && !player.winner || player.tied}">
+    <div class="panel-heading">
+        <h3>{{player.name}}
+            <span ng-if="!dealer || (dealer && player.playing)" class="label" ng-class="{'label-default': player.score() < 21, 'label-danger': player.busted, 'label-success': player.blackjack, 'label-info': player.stand}">{{ player.score() }}</span>
+            <span ng-show="player.busted" class="label label-danger">Busted!</span>
+            <span ng-show="player.blackjack && !dealer" class="label label-success">BlackJack!</span>
+            <span ng-show="player.winner" class="label label-success">Winner!</span>
+            <span ng-show="player.stand && !player.winner && !player.tied" class="label label-info">Stand</span>
+            <span ng-show="player.tied" class="label label-info">Tied!</span>
+        </h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-9" ng-class="{'col-md-12': dealer || player.stand || player.blackjack || player.busted}">
+                <div class="btn-group btn-group-justified" role="group">
+                    <div class="btn-group" role="group" ng-repeat="card in player.cards"  ng-if="!dealer || (dealer && $index == 0) || (dealer && player.playing)">
+                        <button type="button"
+                                class="btn btn-default">{{card.n}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" ng-if="!dealer">
+                <div class="btn-group btn-group-justified" role="group">
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-default" type="button"
+                                ng-hide="player.busted || player.stand || player.blackjack"
+                                ng-click="stand()">Stand
+                        </button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-default" type="button"
+                                ng-hide="player.busted || player.stand || player.blackjack" ng-click="hit()">
+                            Hit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p style="color: red;" ng-if="errorMessage">{{ errorMessage }}</p>
+    </div>
+</div>
